@@ -14,7 +14,8 @@ namespace Retrofit.Net.Tests
         RestResponse<TestRestCallsIntegration.Person> GetPerson([Path("id")] int id);
 
         [Get("people/{id}")]
-        RestResponse<TestRestCallsIntegration.Person> GetPerson([Path("id")] int id, [Query("limit")] int limit, [Query("test")] string test);
+        RestResponse<TestRestCallsIntegration.Person> GetPerson([Path("id")] int id, [Query("limit")] int limit,
+            [Query("test")] string test);
 
         [Post("people")]
         RestResponse<TestRestCallsIntegration.Person> AddPerson([Body] TestRestCallsIntegration.Person person);

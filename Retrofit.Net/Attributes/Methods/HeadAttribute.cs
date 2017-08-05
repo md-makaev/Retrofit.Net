@@ -1,8 +1,6 @@
-﻿using RestSharp;
-
-namespace Retrofit.Net.Attributes.Methods
+﻿namespace Retrofit.Net.Attributes.Methods
 {
-    [RestMethod(Method.HEAD)]
+    [RestMethod(RestMethod.HEAD)]
     public class HeadAttribute : ValueAttribute
     {
         public HeadAttribute(string path)

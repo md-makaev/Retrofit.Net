@@ -1,35 +1,26 @@
-﻿using System;
-using System.Linq;
-using System.Reflection;
-using Castle.DynamicProxy;
-using RestSharp;
+﻿using Castle.DynamicProxy;
 
 namespace Retrofit.Net
 {
-    public class RestInterceptor : IInterceptor
+    class RestInterceptor<T> : IInterceptor
     {
-        private IRestClient restClient;
+        private readonly InterfaceMethods imethods;
+        private readonly IRequestBuilder builder;
 
-        public RestInterceptor(IRestClient restClient)
+        public RestInterceptor(IRequestBuilder builder)
         {
-            this.restClient = restClient;
+            this.builder = builder;
+            imethods = InterfaceMethodsFactory.Create<T>();
         }
 
         public void Intercept(IInvocation invocation)
         {
             // Build Request
-            var methodInfo = new RestMethodInfo(invocation.Method); // TODO: Memoize these objects in a hash for performance
-            var request = new RequestBuilder(methodInfo, invocation.Arguments).Build();
-
+            var methodInfo = imethods.Get(invocation.Method);
+            var request = builder.Build(methodInfo, invocation.Arguments);
             // Execute request
-            var responseType = invocation.Method.ReturnType;
-            var genericTypeArgument = responseType.GenericTypeArguments[0];
-            // We have to find the method manually due to limitations of GetMethod()
-            var methods = restClient.GetType().GetMethods();
-            MethodInfo method = methods.Where(m => m.Name == "Execute").First(m => m.IsGenericMethod);
-            MethodInfo generic = method.MakeGenericMethod(genericTypeArgument);
-            invocation.ReturnValue =  generic.Invoke(restClient, new object[] { request });
-
+            request.Execute();
+            invocation.ReturnValue = request.ReturnValue;
         }
     }
 }

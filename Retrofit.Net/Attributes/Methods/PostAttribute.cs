@@ -1,8 +1,6 @@
-﻿using RestSharp;
-
-namespace Retrofit.Net.Attributes.Methods
+﻿namespace Retrofit.Net.Attributes.Methods
 {
-    [RestMethod(Method.POST)]
+    [RestMethod(RestMethod.POST)]
     public class PostAttribute : ValueAttribute
     {
         public PostAttribute(string path)

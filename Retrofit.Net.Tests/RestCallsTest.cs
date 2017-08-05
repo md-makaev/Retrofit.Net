@@ -6,6 +6,7 @@ using NUnit.Framework;
 using RestSharp;
 using Retrofit.Net.Attributes.Methods;
 using Retrofit.Net.Attributes.Parameters;
+using Retrofit.Net.RestClient;
 
 
 namespace Retrofit.Net.Tests
@@ -50,7 +51,7 @@ namespace Retrofit.Net.Tests
         public void SetUp()
         {
             restClient = Substitute.For<IRestClient>();
-            adapter = new RestAdapter(restClient);
+            adapter = new RestAdapter(new RestClientRequestBuilder(restClient));
             client = adapter.Create<IRestInterface>();
         }
 

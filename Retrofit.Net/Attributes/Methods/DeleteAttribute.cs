@@ -1,8 +1,7 @@
-﻿using RestSharp;
-
+﻿
 namespace Retrofit.Net.Attributes.Methods
 {
-    [RestMethod(Method.DELETE)]
+    [RestMethod(RestMethod.DELETE)]
     public class DeleteAttribute : ValueAttribute
     {
         public DeleteAttribute(string path)

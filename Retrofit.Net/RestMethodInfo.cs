@@ -2,25 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Retrofit.Net.Attributes;
 using Retrofit.Net.Attributes.Methods;
 using Retrofit.Net.Attributes.Parameters;
 
 namespace Retrofit.Net
 {
-    class RestMethodInfo
+    public class RestMethodInfo
     {
         private readonly MethodInfo methodInfo;
         protected object RequestMethod { get; set; }
-        public RestSharp.Method Method { get; set; }
+        public RestMethod Method { get; set; }
+        public Type ResultType => methodInfo.ReturnType;
         public string Path { get; set; }
 
         public List<ParamUsage> ParameterUsage { get; set; }
         public List<string> ParameterNames { get; set; }
 
-        internal enum ParamUsage
+        public enum ParamUsage
         {
             Query, Path, Body
         }
@@ -28,8 +27,7 @@ namespace Retrofit.Net
         public RestMethodInfo(MethodInfo methodInfo)
         {
             this.methodInfo = methodInfo;
-            Init(); // TODO: If supporting async, this should be deferred until needed so we don't
-            // block the calling thread for longer than needed.
+            Init();
         }
 
         private void Init()

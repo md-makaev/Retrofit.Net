@@ -1,8 +1,6 @@
-﻿using RestSharp;
-
-namespace Retrofit.Net.Attributes.Methods
+﻿namespace Retrofit.Net.Attributes.Methods
 {
-    [RestMethod(Method.PUT)]
+    [RestMethod(RestMethod.PUT)]
     public class PutAttribute : ValueAttribute
     {
         public PutAttribute(string path)

@@ -2,6 +2,8 @@
 using FluentAssertions;
 using NSubstitute;
 using NUnit.Framework;
+using RestSharp;
+using Retrofit.Net.RestClient;
 
 
 namespace Retrofit.Net.Tests
@@ -23,7 +25,7 @@ namespace Retrofit.Net.Tests
             {
                 unchecked
                 {
-                    return (Id*397) ^ (Name != null ? Name.GetHashCode() : 0);
+                    return (Id * 397) ^ (Name != null ? Name.GetHashCode() : 0);
                 }
             }
 
@@ -42,14 +44,19 @@ namespace Retrofit.Net.Tests
         [SetUp]
         public void SetUp()
         {
-            adapter = new RestAdapter("http://jordanthoms.apiary.io/");
+            adapter = new RestAdapter(new RestClientRequestBuilder(new RestSharp.RestClient("http://jordanthoms.apiary.io/")));
             service = adapter.Create<IPeopleService>();
         }
 
         [Test]
         public void TestGetPeople()
         {
-            var persons = new List<Person>() {new Person {Id= 1, Name = "Person Name"}, new Person {Id = 2, Name = "Person Name 2"}};
+            var persons = new List<Person>()
+            {
+                new Person {Id = 1, Name = "Person Name"},
+                new Person {Id = 2, Name = "Person Name 2"}
+            };
+
             var people = service.GetPeople();
             people.Data.Should().Equal(persons);
         }
@@ -58,7 +65,8 @@ namespace Retrofit.Net.Tests
         [Test]
         public void TestGetPerson()
         {
-            var person = new Person { Id = 3, Name = "Person Name" };
+            var person = new Person {Id = 3, Name = "Person Name"};
+
             var personResponse = service.GetPerson(3);
             personResponse.Data.Should().Be(person);
         }
@@ -66,7 +74,7 @@ namespace Retrofit.Net.Tests
         [Test]
         public void TestGetPersonQuery()
         {
-            var person = new Person { Id = 3, Name = "Person Name" };
+            var person = new Person {Id = 3, Name = "Person Name"};
             var personResponse = service.GetPerson(3, 100, "tsst");
             personResponse.Data.Should().Be(person);
         }
@@ -75,7 +83,7 @@ namespace Retrofit.Net.Tests
         [Test]
         public void TestAddPerson()
         {
-            var person = new Person { Id = 5,  Name = "Person Name" };
+            var person = new Person {Id = 5, Name = "Person Name"};
             var personResponse = service.AddPerson(person);
             personResponse.Data.Should().Be(person);
         }

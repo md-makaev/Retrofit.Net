@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retrofit.Net", "Retrofit.Net\Retrofit.Net.csproj", "{5F37DFA5-2AFB-4B1D-AD33-1C5A88280924}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retrofit.Net.Tests", "Retrofit.Net.Tests\Retrofit.Net.Tests.csproj", "{4C620445-7AA0-483A-A3E6-D74845F868F4}"
@@ -11,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{50455B
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retrofit.Net.RestClient", "Retrofit.Net.RestClient\Retrofit.Net.RestClient.csproj", "{D44B6780-945B-4571-8367-D8380D081D51}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +30,10 @@ Global
 		{4C620445-7AA0-483A-A3E6-D74845F868F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C620445-7AA0-483A-A3E6-D74845F868F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C620445-7AA0-483A-A3E6-D74845F868F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D44B6780-945B-4571-8367-D8380D081D51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D44B6780-945B-4571-8367-D8380D081D51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D44B6780-945B-4571-8367-D8380D081D51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D44B6780-945B-4571-8367-D8380D081D51}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
